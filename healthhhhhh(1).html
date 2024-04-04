@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Components Table</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #D6EBFD; /* Light blue background color */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+    .header-container {
+        background-color: #3F00FF; /* Blue container background color */
+        padding: 20px;
+        text-align: center;
+    }
+    h1 {
+        margin: 0; /* Remove default margin for h1 */
+        color: white; /* Text color for h1 inside header */
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+    input[type="text"] {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 5px 10px; /* Adjust padding to make button smaller */
+        font-size: 14px; /* Reduce font size */
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button[type="submit"] {
+        background-color: black; /* Set background color to black */
+        color: white; /* Set text color to white */
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .navbar {
+        overflow: hidden;
+        background-color: #333;
+        color: white;   
+    }
+
+    .navbar button {
+        float: left;
+        background-color: #333;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navbar a:hover, .dropdown:hover .dropbtn {
+        background-color: red;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-container">
+    <h1>HealthDiary</h1>
+</div>
+
+<div class="navbar">
+    <button id="userpersonalDataButton" onclick="displayuserDetailsForm()">Edit Info</button>
+    <button id="displayPersonalInfo" onclick="displayPersonalInfo()">Personal Info</button>
+    <button id="userDataButton" onclick="displayBloodComponentTable()">User Data</button>
+    <button id="updateDetailButton" onclick="toggleInputForm()">Update Data</button>
+</div>
+
+<div id="userPersonalData" style="display: none;">
+    <h2>User Personal Data</h2>
+    <div id="personalData"></div>
+</div>
+
+<form id="userDetailsForm" onsubmit="submitForm(event)" style="display: none;">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+
+    <input type="submit" value="Submit">
+</form>
+
+<form id="drugForm">
+    <label for="drugNameInput">Drug Name:</label>
+    <input type="text" id="drugNameInput" name="drugName" required>
+
+    <label for="dosageInput">Dosage:</label>
+    <input type="text" id="dosageInput" name="dosage" required>
+
+    <button type="submit">Add Drug</button>
+</form>
+
+<table id="drugshistroy" style="display: block;">
+    <thead>
+        <tr>
+            <th>Drugs/Medication</th>
+            <th>Dosage</th>
+        </tr>
+    </thead>
+    <tbody id="tableBodydrug">
+        <!-- Table body content will be populated dynamically using JavaScript -->
+    </tbody>
+</table>
+
+<table id="bloodComponentsTable" style="display: none;">
+    <thead>
+        <tr>
+            <th>Component</th>
+            <th>Amount (mg/dL)</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        <!-- Table body content will be populated dynamically using JavaScript -->
+    </tbody>
+</table>
+
+<div id="inputForm" style="display: none;">
+    <h3>Enter Amount for Selected Component:</h3>
+    <form id="bloodForm">
+        <label for="componentSelect">Select Component:</label>
+        <select id="componentSelect" name="component">
+            <!-- Options will be populated dynamically using JavaScript -->
+        </select>
+        <label for="amountInput">Amount (mg/dL):</label>
+        <input type="text" id="amountInput" name="amount">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+var drugsHistoryData = []; // Initialize an empty array to store drugs history data
+
+function submitDrugForm(event) {
+    event.preventDefault();
+
+    // Get drug name and dosage values from the form
+    var drugName = document.getElementById("drugNameInput").value;
+    var dosage = document.getElementById("dosageInput").value;
+
+    // Create an object representing the new drug entry
+    var newDrugEntry = {
+        drug: drugName,
+        dosage: dosage
+    };
+
+    // Add the new drug entry to the drugs history data array
+    drugsHistoryData.push(newDrugEntry);
+
+    // Populate the drugs history table with the updated data
+    populateDrugsHistoryTable();
+
+    // Reset the form fields
+    document.getElementById("drugForm").reset();
+}
+
+function populateDrugsHistoryTable() {
+    var tableBody = document.getElementById('tableBodydrug');
+    tableBody.innerHTML = ''; // Clear previous content
+    drugsHistoryData.forEach(function(data) {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td>' + data.drug + '</td>' +
+                        '<td>' + data.dosage + '</td>';
+        tableBody.appendChild(row);
+    });
+}
+
+// Add event listener to the drug form submission
+document.getElementById('drugForm').addEventListener('submit', submitDrugForm);
+
+function submitForm(event) {
+    event.preventDefault();
+    
+    // Get form values
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var age = document.getElementById("age").value;
+    
+    // Create object to hold user details
+    var userDetails = {
+        name: name,
+        email: email,
+        age: age
+    };
+    
+    // Reset form
+    document.getElementById("userDetailsForm").reset();
+}
+
+var bloodComponentsData = [
+    { component: 'Red Blood Cells', amount: null },
+    { component: 'White Blood Cells', amount: null },
+    { component: 'Platelets', amount: null },
+    { component: 'Hemoglobin', amount: null },
+    { component: 'Hematocrit', amount: null },
+    { component: 'Albumin', amount: null },
+    { component: 'Total Protein', amount: null },
+    { component: 'Glucose', amount: null },
+    { component: 'Cholesterol', amount: null }
+];
+
+function populateTable() {
+    var tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = ''; // Clear previous content
+    bloodComponentsData.forEach(function(data) {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td>' + data.component + '</td>' +
+                        '<td>' + (data.amount !== null ? data.amount : '') + '</td>';
+        tableBody.appendChild(row);
+    });
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    var componentIndex = document.getElementById('componentSelect').selectedIndex;
+    var amount = document.getElementById('amountInput').value;
+    if (amount) {
+        bloodComponentsData[componentIndex].amount = amount;
+        populateTable();
+        document.getElementById('bloodForm').reset(); // Reset form fields
+    } else {
+        alert('Please enter the amount.');
+    }
+}
+
+function populateComponentOptions() {
+    var select = document.getElementById('componentSelect');
+    bloodComponentsData.forEach(function(data) {
+        var option = document.createElement('option');
+        option.text = data.component;
+        select.add(option);
+    });
+}
+
+function displayuserDetailsForm() {
+    var inputForm1 = document.getElementById('userDetailsForm');
+
+    if (inputForm1.style.display === 'none') {
+        inputForm1.style.display = 'block';
+        userpersonalDataButton.style.backgroundColor = '#f44336';
+        hideOtherDisplays('userDetailsForm');
+        resetButtonColors();
+    } else {
+        inputForm1.style.display = 'none';
+        userpersonalDataButton.style.backgroundColor = '#333';
+    }
+}
+
+function toggleInputForm() {
+    var inputForm = document.getElementById('inputForm');
+
+    if (inputForm.style.display === 'none') {
+        inputForm.style.display = 'block';
+        hideOtherDisplays('inputForm');
+        resetButtonColors();
+    } else {
+        inputForm.style.display = 'none';
+    }
+}
+
+function displayBloodComponentTable() {
+    var table = document.getElementById('bloodComponentsTable');
+
+    if (table.style.display === 'none') {
+        table.style.display = 'table';
+        hideOtherDisplays('bloodComponentsTable');
+        resetButtonColors();
+    } else {
+        table.style.display = 'none';
+    }
+}
+
+function displayPersonalInfo() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var age = document.getElementById("age").value;
+    
+    var personalInfo = document.getElementById("personalData");
+    personalInfo.innerHTML = "<p><strong>Name:</strong> " + name + "</p>" +
+                             "<p><strong>Email:</strong> " + email + "</p>" +
+                             "<p><strong>Age:</strong> " + age + "</p>";
+
+    var userPersonalData = document.getElementById('userPersonalData');
+    if (userPersonalData.style.display === 'none') {
+        userPersonalData.style.display = 'block';
+        hideOtherDisplays('userPersonalData');
+        resetButtonColors();
+    } else {
+        userPersonalData.style.display = 'none';
+    }
+}
+
+function hideOtherDisplays(currentDisplayId) {
+    var displays = ['userDetailsForm', 'bloodComponentsTable', 'inputForm', 'userPersonalData'];
+    for (var i = 0; i < displays.length; i++) {
+        if (displays[i] !== currentDisplayId) {
+            var display = document.getElementById(displays[i]);
+            if (display) {
+                display.style.display = 'none';
+            }
+        }
+    }
+}
+
+function resetButtonColors() {
+    var buttons = document.getElementsByClassName('navbar')[0].getElementsByTagName('button');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].style.backgroundColor = '#333';
+    }
+}
+
+populateTable();
+populateComponentOptions();
+document.getElementById('bloodForm').addEventListener('submit', handleSubmit);
+
+</script>
+
+</body>
+</html>
