@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Components Table</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="header-container">
+    <h1>HealthDiary</h1>
+</div>
+
+<div class="navbar">
+    <button id="userpersonalDataButton" onclick="displayuserDetailsForm()">Edit Info</button>
+    <button id="displayPersonalInfo" onclick="displayPersonalInfo()">Personal Info</button>
+    <button id="userDataButton" onclick="displayBloodComponentTable()">User Data</button>
+    <button id="updateDetailButton" onclick="toggleInputForm()">Update Data</button>
+</div>
+
+<div id="userPersonalData" style="display: none;">
+    <h2>User Personal Data</h2>
+    <div id="personalData"></div>
+</div>
+
+<form id="userDetailsForm" onsubmit="submitForm(event)" style="display: none;">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+
+    <input type="submit" value="Submit">
+</form>
+
+<form id="drugForm">
+    <label for="drugNameInput">Drug Name:</label>
+    <input type="text" id="drugNameInput" name="drugName" required>
+
+    <label for="dosageInput">Dosage:</label>
+    <input type="text" id="dosageInput" name="dosage" required>
+
+    <button type="submit">Add Drug</button>
+</form>
+
+<table id="drugshistroy" style="display: block;">
+    <thead>
+        <tr>
+            <th>Drugs/Medication</th>
+            <th>Dosage</th>
+        </tr>
+    </thead>
+    <tbody id="tableBodydrug">
+        <!-- Table body content will be populated dynamically using JavaScript -->
+    </tbody>
+</table>
+
+<table id="bloodComponentsTable" style="display: none;">
+    <thead>
+        <tr>
+            <th>Component</th>
+            <th>Amount (mg/dL)</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody">
+        <!-- Table body content will be populated dynamically using JavaScript -->
+    </tbody>
+</table>
+
+<div id="inputForm" style="display: none;">
+    <h3>Enter Amount for Selected Component:</h3>
+    <form id="bloodForm">
+        <label for="componentSelect">Select Component:</label>
+        <select id="componentSelect" name="component">
+            <!-- Options will be populated dynamically using JavaScript -->
+        </select>
+        <label for="amountInput">Amount (mg/dL):</label>
+        <input type="text" id="amountInput" name="amount">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<script src="https://kit.fontawesome.com/fc596df623.js" crossorigin="anonymous"></script>
+
+<h1>Medication history Timeline</h1>
+
+
+<div class="timeline">
+
+	<!--first-->
+	<div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+		<div class="timeline__event__icon ">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			Date 1
+		</div>
+		<div class="timeline__event__content ">
+			<div class="timeline__event__title">
+				Thing 1
+			</div>
+			<div class="timeline__event__description">
+				<p>contents 1............................................................................</p>
+			</div>
+		</div>
+	</div>
+
+	<!--second-->
+
+	<div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			Date 2
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				Thing 2
+			</div>
+			<div class="timeline__event__description">
+				<p>Contents 2 ...................................................................</p>
+			</div>
+		</div>
+	</div>
+
+	<!--third-->
+
+	<div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			Date 3
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				Thing 3
+			</div>
+			<div class="timeline__event__description">
+				<p>contents 3.....................................................................</p>
+			</div>
+
+		</div>
+	</div>
+
+	<!--forth-->
+
+	<div class="timeline__event animated fadeInUp timeline__event--type1">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+            Date 4
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				Thng 4
+			</div>
+			<div class="timeline__event__description">
+				<p>contents 4.............................................................................</p>
+			</div>
+		</div>
+	</div>
+
+	<!--first-->
+	<div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+		<div class="timeline__event__icon ">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 5
+		</div>
+		<div class="timeline__event__content ">
+			<div class="timeline__event__title">
+				Thing 5
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--second-->
+
+	<div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 6
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				thing 6
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--third-->
+
+	<div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 7
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				thing 7
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+
+		</div>
+	</div>
+
+	<!--forth-->
+
+	<div class="timeline__event animated fadeInUp timeline__event--type1">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 8
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				thing 8
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--first-->
+	<div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+		<div class="timeline__event__icon ">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 9
+		</div>
+		<div class="timeline__event__content ">
+			<div class="timeline__event__title">
+				Thing 9
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--second-->
+
+	<div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 10
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				Thing 10
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--third-->
+
+	<div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			Date 11
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				tging 11
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+
+		</div>
+	</div>
+
+	<!--forth-->
+
+	<div class="timeline__event animated fadeInUp timeline__event--type1">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			date 12
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				thing 12
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--first-->
+	<div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+		<div class="timeline__event__icon ">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			November 2009
+		</div>
+		<div class="timeline__event__content ">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--second-->
+
+	<div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			May 2010
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--third-->
+
+	<div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			November 2011
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+
+		</div>
+	</div>
+
+	<!--forth-->
+
+	<div class="timeline__event animated fadeInUp timeline__event--type1">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			July 2012
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--first-->
+	<div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+		<div class="timeline__event__icon ">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			November 2012
+		</div>
+		<div class="timeline__event__content ">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--second-->
+
+	<div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			November 2013
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--third-->
+
+	<div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			September 2015
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+
+		</div>
+	</div>
+
+	<!--forth-->
+
+	<div class="timeline__event animated fadeInUp timeline__event--type1">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			December 2016
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--first-->
+	<div class="timeline__event  animated fadeInUp delay-3s timeline__event--type1">
+		<div class="timeline__event__icon ">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			October 2017
+		</div>
+		<div class="timeline__event__content ">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--second-->
+
+	<div class="timeline__event animated fadeInUp delay-2s timeline__event--type2">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			June 2019
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+	<!--third-->
+
+	<div class="timeline__event animated fadeInUp delay-1s timeline__event--type3">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			February 2021
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaaaaaaaaaaaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+
+		</div>
+	</div>
+	<!--forth-->
+
+	<div class="timeline__event animated fadeInUp timeline__event--type1">
+		<div class="timeline__event__icon">
+			<!-- <i class="lni-sport"></i>-->
+
+		</div>
+		<div class="timeline__event__date">
+			December 2016
+		</div>
+		<div class="timeline__event__content">
+			<div class="timeline__event__title">
+				aaaaaaa
+			</div>
+			<div class="timeline__event__description">
+				<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel, nam! Nam eveniet ut aliquam ab asperiores, accusamus iure veniam corporis incidunt reprehenderit accusantium id aut architecto harum quidem dolorem in!</p>
+			</div>
+		</div>
+	</div>
+
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>
