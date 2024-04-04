@@ -194,6 +194,201 @@ function populateDrugsHistoryTable() {
                         '<td>' + data.dosage + '</td>';
         tableBody.appendChild(row);
     });
+    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Mario Timeline</title>
+  <style>
+    /* Insert CSS code here */
+    $content-width: calc(40vw - 84px);
+    $margin: 20px;
+    $spacing: 20px;
+    $bdrs: 6px;
+    $circle-size: 40px;
+    $icon-size: 32px;
+    $bdrs-icon: 100%;
+
+    $color1: #9251ac;
+    $color2: #f6a4ec;
+
+    $color3: #87bbfe;
+    $color4: #555ac0;
+
+    $color5: #24b47e;
+    $color6: #aff1b6;
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 14px;
+    }
+
+    body {
+      background: #f6f9fc;
+      font-family: "Open Sans", sans-serif;
+      color: #525f7f;
+    }
+
+    h2 {
+      margin: 5%;
+      text-align: center;
+      font-size: 4rem;
+      font-weight: 100;
+    }
+
+    h1 {
+      margin: 4%;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 10;
+      top: 0;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      margin: $margin auto;
+      position: relative;
+    }
+
+    .timeline__event {
+      margin-bottom: $spacing;
+      position: relative;
+      display: flex;
+      margin: $spacing 0;
+      border-radius: $bdrs;
+      align-self: center;
+      width: 50vw;
+    }
+
+    .timeline__event:nth-child(2n + 1) {
+      flex-direction: row-reverse;
+    }
+
+    .timeline__event__title {
+      font-size: 1.2rem;
+      line-height: 1.4;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $color1;
+      letter-spacing: 1.5px;
+    }
+
+    .timeline__event__content {
+      padding: $spacing;
+      box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+      background: #fff;
+      width: $content-width;
+      border-radius: 0 $bdrs $bdrs 0;
+    }
+
+    .timeline__event__date {
+      color: $color2;
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: $color1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      padding: 0 $spacing;
+      border-radius: $bdrs 0 0 $bdrs;
+    }
+
+    .timeline__event__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color1;
+      padding: $spacing;
+      align-self: center;
+      margin: 0 $spacing;
+      background: $color2;
+      border-radius: $bdrs-icon;
+      width: $circle-size;
+      box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25), 0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+      padding: 40px;
+      height: $circle-size;
+      position: relative;
+    }
+
+    .timeline__event:nth-child(2n + 1) .timeline__event__icon:before,
+    .timeline__event:nth-child(2n + 1) .timeline__event__icon:after {
+      background: $color3;
+    }
+
+    .timeline__event__icon:before {
+      content: "";
+      width: 2px;
+      height: 100%;
+      background: $color2;
+      position: absolute;
+      top: 0%;
+      z-index: -1;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: fillTop 2s forwards 4s ease-in-out;
+    }
+
+    .timeline__event__icon:after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      background: $color2;
+      position: absolute;
+      left: 0%;
+      z-index: -1;
+      top: 50%;
+      transform: translateY(-50%);
+      animation: fillLeft 2s forwards 4s ease-in-out;
+    }
+
+    @keyframes fillLeft {
+      100% {
+        right: 100%;
+      }
+    }
+
+    @keyframes fillTop {
+      100% {
+        top: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Super Mario Timeline</h1>
+  <h2>Adventures of Mario</h2>
+  <div class="timeline">
+    <div class="timeline__event">
+      <div class="timeline__event__date">1985</div>
+      <div class="timeline__event__content">
+        <div class="timeline__event__title">Super Mario Bros.</div>
+        <div class="timeline__event__description">The iconic game that introduced Mario to the world.</div>
+      </div>
+      <div class="timeline__event__icon"><i class="fas fa-gamepad"></i></div>
+    </div>
+    <div class="timeline__event">
+      <div class="timeline__event__date">1996</div>
+      <div class="timeline__event__content">
+        <div class="timeline__event__title">Super Mario 64</div>
+        <div class="timeline__event__description">The first 3D adventure of Mario, setting new standards for gaming.</div>
+      </div>
+      <div class="timeline__event__icon"><i class="fas fa-gamepad"></i></div>
+    </div>
+    <div class="timeline__event">
+      <div class="timeline__event__date">2007</div>
+      <div class="timeline__event__content">
+        <div class="timeline__event__title">Super Mario Galaxy</div>
+        <div class="timeline__event__description">Mario ventures into space in this critically acclaimed game.</div>
+      </div>
+      <div class="timeline__event__icon"><i class="fas fa-gamepad"></i></div>
+    </div>
+  </div>
+
+
 }
 
 // Add event listener to the drug form submission
