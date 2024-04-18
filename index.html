@@ -1,90 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Components Table</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthCare Daires</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header>
+    <nav>
+      <div class="logo">
+        <a href="#"></i> <span id="HealthCare Daires">HealthCare Daires</span></a>
+      </div>
+      <ul>
+        <li><a href="#" onclick="showHome()"><span id="nav-home">Home</span></a></li>
+        <li><a href="#" onclick="showPersonalInfo()"><span id="nav-personal-info">Personal Info</span></a></li>
 
-<div class="header-container">
-    <h1>Health History Database</h1>
-</div>
-
-<div class="navbar">
-    <button id="userpersonalDataButton" onclick="displayuserDetailsForm()">Edit Info</button>
-    <button id="displayPersonalInfo" onclick="displayPersonalInfo()">Personal Info</button>
-    <button id="userDataButton" onclick="displayBloodComponentTable()">User Data</button>
-    <button id="updateDetailButton" onclick="toggleInputForm()">Update Data</button>
-	<a href="profile.html" class="button">Profile</a>
-	<a href="timeline.html" class="button">Drug Timeline</a>
-</div>
-
-<div id="userPersonalData" style="display: none;">
-    <h2>User Personal Data</h2>
-    <div id="personalData"></div>
-</div>
-
-<form id="userDetailsForm" onsubmit="submitForm(event)" style="display: none;">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required>
-
-    <input type="submit" value="Submit">
-</form>
-
-<form id="drugForm">
-    <label for="drugNameInput">Drug Name:</label>
-    <input type="text" id="drugNameInput" name="drugName" required>
-
-    <label for="dosageInput">Dosage:</label>
-    <input type="text" id="dosageInput" name="dosage" required>
-
-    <button type="submit">Add Drug</button>
-</form>
-
-<table id="drugshistroy" style="display: block;">
-    <thead>
-        <tr>
-            <th>Drugs/Medication</th>
-            <th>Dosage</th>
-        </tr>
-    </thead>
-    <tbody id="tableBodydrug">
-        <!-- Table body content will be populated dynamically using JavaScript -->
-    </tbody>
-</table>
-
-<table id="bloodComponentsTable" style="display: none;">
-    <thead>
-        <tr>
-            <th>Component</th>
-            <th>Amount (mg/dL)</th>
-        </tr>
-    </thead>
-    <tbody id="tableBody">
-        <!-- Table body content will be populated dynamically using JavaScript -->
-    </tbody>
-</table>
-
-<div id="inputForm" style="display: none;">
-    <h3>Enter Amount for Selected Component:</h3>
-    <form id="bloodForm">
-        <label for="componentSelect">Select Component:</label>
-        <select id="componentSelect" name="component">
-            <!-- Options will be populated dynamically using JavaScript -->
+        <li><a href="#" onclick="showUserData()"><span id="nav-user-data">User Data</span></a></li>
+        <li><a href="#" onclick="showUpdateData()"><span id="nav-update-data">Update Data</span></a></li>
+        
+        
+      </ul>
+      <div id="languageSelector">
+        <select id="language">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="mr">Marathi</option>
         </select>
-        <label for="amountInput">Amount (mg/dL):</label>
-        <input type="text" id="amountInput" name="amount">
-        <button type="submit">Submit</button>
-    </form>
-</div>
+      </div>
+    </nav>
+  </header>
 
+  <main>
+    <div id="homeContainer">
+        <div id="userPersonalData" style="display: none;">
+            <h2>User Personal Data</h2>  
+            <div id="personalData"></div>
+        </div>
+
+        
+        <img src="https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_1280.jpg"/>
+        <div class="home-buttons">
+            <a href="profile.html" class="button">Profile</a>
+            <a href="timeline.html" class="button">Drug Timeline</a>
+        </div>
+        <form id="userDetailsForm" onsubmit="submitForm(event)" style="display: none;">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+        
+            <input type="submit" value="Submit">
+        </form>
+        
+    </div>
+
+    <div id="personalInfoContainer" class="hidden">
+      <div id="personalInfo" class="card">
+        <h2><span id="personal-info-heading">Personal Information</span></h2>
+        <form id="personalInfoForm">
+          <label for="name"><span id="label-name">Name:</span></label>
+          <input type="text" id="name" name="name" required>
+          <label for="age"><span id="label-age">Age:</span></label>
+          <input type="number" id="age" name="age" required>
+          <label for="email"><span id="label-email">Email:</span></label>
+          <input type="email" id="email" name="email" required>
+          <label for="drugName"><span id="label-drug-name">Drug Name:</span></label>
+          <input type="text" id="drugName" name="drugName" required>
+          <label for="dosage"><span id="label-dosage">Dosage:</span></label>
+          <input type="text" id="dosage" name="dosage" required>
+          <button type="submit"><span id="submit-button">Submit</span></button>
+        </form>
+      </div>
+    </div>
+
+    <div id="profileContainer" class="hidden">
+      <div id="profile" class="card">
+        <h2>Profile</h2>
+        <p>Name: <span id="profileName"></span></p>
+        <p>Age: <span id="profileAge"></span></p>
+        <p>Email: <span id="profileEmail"></span></p>
+        <p>Drug Name: <span id="profileDrugName"></span></p>
+        <p>Dosage: <span id="profileDosage"></span></p>
+      </div>
+    </div>
+
+    <div id="userDataContainer" class="hidden">
+      <div id="userData" class="card">
+        <h2>User Data</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Red Blood Cells</td>
+              <td id="redbloodcells"></td>
+            </tr>
+            <tr>
+              <td>White Blood Cells</td>
+              <td id="whitebloodcells"></td>
+            </tr>
+            <tr>
+              <td>Platelets</td>
+              <td id="platelets"></td>
+            </tr>
+            <tr>
+              <td>Hemoglobin</td>
+              <td id="hemoglobin"></td>
+            </tr>
+            <tr>
+              <td>Hematocrit</td>
+              <td id="hematocrit"></td>
+            </tr>
+            <tr>
+              <td>Albumin</td>
+              <td id="albumin"></td>
+            </tr>
+            <tr>
+              <td>Total Protein</td>
+              <td id="totalprotein"></td>
+            </tr>
+            <tr>
+              <td>Glucose</td>
+              <td id="glucose"></td>
+            </tr>
+            <tr>
+              <td>Cholesterol</td>
+              <td id="cholesterol"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="updateDataContainer" class="hidden">
+      <div id="updateData" class="card">
+        <h2>Update Data</h2>
+        <div id="componentList">
+          <ul>
+            <li>Red Blood Cells</li>
+            <li>White Blood Cells</li>
+            <li>Platelets</li>
+            <li>Hemoglobin</li>
+            <li>Hematocrit</li>
+            <li>Albumin</li>
+            <li>Total Protein</li>
+            <li>Glucose</li>
+            <li>Cholesterol</li>
+          </ul>
+        </div>
+        <form id="updateDataForm">
+          <label for="component">Component:</label>
+          <input type="text" id="component" name="component" required>
+          <label for="amount">Amount:</label>
+          <input type="text" id="amount" name="amount" required>
+          <button type="submit"><span id="update-button">Update</span></button>
+        </form>
+      </div>
+    </div>
+
+    <div id="drugTimeline" class="hidden">
+      <h2>Drug Timeline</h2>
+      <a href="timeline.html" class="button">Drug Timeline</a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p><span id="footer-text">&copy; 2023 HealthCare Pro. All rights reserved.</span></p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="language.js"></script>
 </body>
 </html>
