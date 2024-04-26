@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #bdb6b6;
+  background-image: url("https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_1280.jpg");
 }
 
 header {
@@ -169,7 +170,9 @@ footer {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px; /* Adjust the spacing between buttons */
+    margin-right: 40px; /* Adjust the spacing between buttons */
+    margin-bottom: 40px;
+    margin-left: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
   }
@@ -186,4 +189,11 @@ footer {
     background-position: center;
     height: 100vh; /* Set the height to the viewport height */
     position: relative;
+  }
+  
+  
+  #homeContainer img {
+    position: center; /* Change position to relative */
+    max-width: calc(100% - 20px); /* Adjust width as needed */
+    max-height: calc(100% - 10px); /* Adjust height as needed */
   }
